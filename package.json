@@ -4,8 +4,7 @@
   "description": "Slack bot impersonating 60’s Robin, played by Burt Ward.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -28,10 +27,6 @@
   "homepage": "https://github.com/gnclmorais/holy-ward-slack#readme",
   "dependencies": {
     "botkit": "^0.2.2",
-    "dotenv": "^2.0.0",
-    "nconf": "^0.8.4",
-    "slapp": "^1.0.2",
-    "slapp-context-beepboop": "^1.0.0",
-    "slapp-convo-beepboop": "^1.0.0"
+    "nconf": "^0.8.4"
   }
 }
