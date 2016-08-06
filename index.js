@@ -3,7 +3,6 @@ nconf.env().file({ file: '.env' });
 var PORT = nconf.get('PORT');
 var TOKEN = nconf.get('TOKEN');
 
-
 var holy = require('./holy');
 
 var Slapp = require('slapp');
@@ -22,7 +21,7 @@ if (!TOKEN) {
 var controller = Botkit.slackbot({ debug: true });
 var bot = controller.spawn({ token: TOKEN }).startRTM();
 
-controller.setupWebserver(3000, function (err, webserver) {
+controller.setupWebserver(PORT, function (err, webserver) {
   controller.createWebhookEndpoints(webserver);
 });
 
