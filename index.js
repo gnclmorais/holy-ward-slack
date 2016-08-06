@@ -1,4 +1,9 @@
-require('dotenv').config();
+var nconf = require('nconf');
+nconf.env().file({ file: '.env' });
+var PORT = nconf.get('PORT');
+var TOKEN = nconf.get('TOKEN');
+
+
 var holy = require('./holy');
 
 var Slapp = require('slapp');
@@ -7,17 +12,15 @@ var BeepBoopContext = require('slapp-context-beepboop');
 
 var Botkit = require('botkit');
 
-if (!process.env.PORT) {
+if (!PORT) {
   throw Error('Port missing but required');
 }
-if (!process.env.SLACK) {
+if (!TOKEN) {
   throw Error('Slack Token missing but required');
 }
 
-console.log('process.env.SLACK', process.env.SLACK);
-
 var controller = Botkit.slackbot({ debug: true });
-var bot = controller.spawn({ token: process.env.SLACK }).startRTM();
+var bot = controller.spawn({ token: TOKEN }).startRTM();
 
 controller.setupWebserver(3000, function (err, webserver) {
   controller.createWebhookEndpoints(webserver);
