@@ -17,7 +17,7 @@ if (!process.env.SLACK) {
 console.log('process.env.SLACK', process.env.SLACK);
 
 var controller = Botkit.slackbot({ debug: true });
-//var bot = controller.spawn({ token: process.env.SLACK }).startRTM();
+var bot = controller.spawn({ token: process.env.SLACK }).startRTM();
 
 controller.setupWebserver(3000, function (err, webserver) {
   controller.createWebhookEndpoints(webserver);
