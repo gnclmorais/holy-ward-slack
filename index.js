@@ -22,7 +22,6 @@ var controller = Botkit.slackbot({
   debug: true,
   logLevel: 7,
 });
-//var bot = controller.spawn({ token: TOKEN }).startRTM();
 
 controller.setupWebserver(PORT, function (err, webserver) {
   controller.createWebhookEndpoints(webserver);
@@ -34,7 +33,7 @@ controller.on('slash_command', function (bot, message) {
   if (message.command === '/holy') {
     var response = message.text ? ('Holy ' + message.text) : holy();
 
-    bot.replyPublic(message, response);
+    bot.replyPublic(message, response + '!');
   }
 });
 
