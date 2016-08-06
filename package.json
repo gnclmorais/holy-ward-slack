@@ -1,0 +1,36 @@
+{
+  "name": "holy-ward-slack",
+  "version": "1.0.0",
+  "description": "Slack bot impersonating 60’s Robin, played by Burt Ward.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gnclmorais/holy-ward-slack.git"
+  },
+  "keywords": [
+    "robin",
+    "batman",
+    "holy",
+    "burt",
+    "ward",
+    "catch",
+    "phrase"
+  ],
+  "author": "Gonçalo Morais <gnclmorais@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gnclmorais/holy-ward-slack/issues"
+  },
+  "homepage": "https://github.com/gnclmorais/holy-ward-slack#readme",
+  "dependencies": {
+    "botkit": "^0.2.2",
+    "dotenv": "^2.0.0",
+    "slapp": "^1.0.2",
+    "slapp-context-beepboop": "^1.0.0",
+    "slapp-convo-beepboop": "^1.0.0"
+  }
+}
