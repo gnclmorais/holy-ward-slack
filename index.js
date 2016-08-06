@@ -29,6 +29,8 @@ controller.setupWebserver(PORT, function (err, webserver) {
 });
 
 controller.on('slash_command', function (bot, message) {
+  console.log('slash_command', message);
+
   if (message.command === '/holy') {
     var response = message.text ? ('Holy ' + message.text) : holy();
 
