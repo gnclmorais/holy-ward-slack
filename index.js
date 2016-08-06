@@ -1,63 +1,38 @@
+// Load necessary settings first
 var nconf = require('nconf');
-nconf.env().file({ file: '.env' });
-var PORT = nconf.get('PORT');
+nconf.env().file({ file: '.env.json' });
+var PORT  = nconf.get('PORT');
 var TOKEN = nconf.get('TOKEN');
+var isTesting = nconf.get('MODE')  === 'test';
 
 var holy = require('./holy');
-
-var Slapp = require('slapp');
-var ConvoStore = require('slapp-convo-beepboop');
-var BeepBoopContext = require('slapp-context-beepboop');
-
 var Botkit = require('botkit');
 
-if (!PORT) {
-  throw Error('Port missing but required');
-}
-if (!TOKEN) {
-  throw Error('Slack Token missing but required');
-}
+if (!PORT)  { throw Error('Port missing but required');        }
+if (!TOKEN) { throw Error('Slack token missing but required'); }
 
-var controller = Botkit.slackbot({
+var controller = Botkit.slackbot(isTesting ? {
   debug: true,
   logLevel: 7,
+} : {
+  debug: false,
 });
 
-controller.setupWebserver(PORT, function (err, webserver) {
+controller
+  .setupWebserver(PORT, createWebhook)
+  .on('slash_command', handleSlashCommand);
+
+/******************************************************************************/
+
+function createWebhook(err, webserver) {
   controller.createWebhookEndpoints(webserver);
-});
+}
 
-controller.on('slash_command', function (bot, message) {
-  console.log('slash_command', message);
-
-  if (message.command === '/holy') {
-    var response = message.text ? ('Holy ' + message.text) : holy();
-
-    bot.replyPublic(message, response + '!');
+function handleSlashCommand(bot, message) {
+  switch (message.command) {
+    case '/holy':
+      var response = message.text ? ('Holy ' + message.text) : holy();
+      bot.replyPublic(message, response + '!');
+      break;
   }
-});
-
-
-
-
-
-
-
-
-
-
-
-
-// var slapp = Slapp({
-//   verify_token: process.env.SLACK,
-//   convo_store: ConvoStore(),
-//   context: BeepBoopContext(),
-//   log: true,
-//   colors: true,
-// })
-
-// /** Registe the slash command `/holy` */
-// slapp.command('/holy', /^in/, function (msg) {
-//   // `respond` is used for actions or commands and uses the `response_url` provided by the
-//   // incoming request from Slack
-// });
+}
