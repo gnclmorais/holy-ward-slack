@@ -22,7 +22,7 @@ var controller = Botkit.slackbot({
   debug: true,
   logLevel: 7,
 });
-var bot = controller.spawn({ token: TOKEN }).startRTM();
+//var bot = controller.spawn({ token: TOKEN }).startRTM();
 
 controller.setupWebserver(PORT, function (err, webserver) {
   controller.createWebhookEndpoints(webserver);
