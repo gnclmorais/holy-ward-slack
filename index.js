@@ -18,7 +18,10 @@ if (!TOKEN) {
   throw Error('Slack Token missing but required');
 }
 
-var controller = Botkit.slackbot({ debug: true });
+var controller = Botkit.slackbot({
+  debug: true,
+  logLevel: 7,
+});
 var bot = controller.spawn({ token: TOKEN }).startRTM();
 
 controller.setupWebserver(PORT, function (err, webserver) {
